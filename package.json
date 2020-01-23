@@ -1,6 +1,6 @@
 {
   "name": "@mrcthms/jsx-ast-utils",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "AST utility module for statically analyzing JSX",
   "main": "lib/index.js",
   "scripts": {
