@@ -5,6 +5,7 @@ import JSXExpressionContainer, { extractLiteral } from './expressions';
 // Composition map of types to their extractor functions.
 const TYPES = {
   Literal,
+  StringLiteral: Literal,
   JSXElement,
   JSXExpressionContainer,
 };

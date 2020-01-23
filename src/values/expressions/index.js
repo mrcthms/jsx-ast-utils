@@ -24,6 +24,7 @@ import TypeCastExpression from './TypeCastExpression';
 const TYPES = {
   Identifier,
   Literal,
+  StringLiteral: Literal,
   JSXElement,
   TaggedTemplateExpression,
   TemplateLiteral,
@@ -64,10 +65,7 @@ export default function extract(value) {
   // Value will not have the expression property when we recurse.
   // The type for expression on ArrowFunctionExpression is a boolean.
   let expression;
-  if (
-    typeof value.expression !== 'boolean'
-    && value.expression
-  ) {
+  if (typeof value.expression !== 'boolean' && value.expression) {
     expression = value.expression; // eslint-disable-line prefer-destructuring
   } else {
     expression = value;
@@ -94,6 +92,13 @@ export default function extract(value) {
 const LITERAL_TYPES = Object.assign({}, TYPES, {
   Literal: (value) => {
     const extractedVal = TYPES.Literal.call(undefined, value);
+    const isNull = extractedVal === null;
+    // This will be convention for attributes that have null
+    // value explicitly defined (<div prop={null} /> maps to 'null').
+    return isNull ? 'null' : extractedVal;
+  },
+  StringLiteral: (value) => {
+    const extractedVal = TYPES.StringLiteral.call(undefined, value);
     const isNull = extractedVal === null;
     // This will be convention for attributes that have null
     // value explicitly defined (<div prop={null} /> maps to 'null').
