@@ -6,6 +6,8 @@ import JSXExpressionContainer, { extractLiteral } from './expressions';
 const TYPES = {
   Literal,
   StringLiteral: Literal,
+  BooleanLiteral: Literal,
+  NumericLiteral: Literal,
   JSXElement,
   JSXExpressionContainer,
 };
