@@ -8,6 +8,7 @@ const TYPES = {
   StringLiteral: Literal,
   BooleanLiteral: Literal,
   NumericLiteral: Literal,
+  NullLiteral: Literal,
   JSXElement,
   JSXExpressionContainer,
 };

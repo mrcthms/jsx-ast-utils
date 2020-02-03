@@ -27,6 +27,7 @@ const TYPES = {
   StringLiteral: Literal,
   BooleanLiteral: Literal,
   NumericLiteral: Literal,
+  NullLiteral: Literal,
   JSXElement,
   TaggedTemplateExpression,
   TemplateLiteral,
@@ -115,6 +116,13 @@ const LITERAL_TYPES = Object.assign({}, TYPES, {
   },
   NumericLiteral: (value) => {
     const extractedVal = TYPES.NumericLiteral.call(undefined, value);
+    const isNull = extractedVal === null;
+    // This will be convention for attributes that have null
+    // value explicitly defined (<div prop={null} /> maps to 'null').
+    return isNull ? 'null' : extractedVal;
+  },
+  NullLiteral: (value) => {
+    const extractedVal = TYPES.NullLiteral.call(undefined, value);
     const isNull = extractedVal === null;
     // This will be convention for attributes that have null
     // value explicitly defined (<div prop={null} /> maps to 'null').
